@@ -24,6 +24,12 @@ Relative frame task
 .. automodule:: mink.tasks.relative_frame_task
     :members:
 
+Pose constraint task
+--------------------
+
+.. automodule:: mink.tasks.pose_constraint_task
+    :members:
+
 Center of mass task
 -------------------
 
