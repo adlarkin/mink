@@ -56,12 +56,29 @@ if __name__ == "__main__":
 
     configuration = mink.Configuration(model)
 
-    end_effector_task = mink.FrameTask(
+    # Limit the end-effector to move within a rectangle centered about the origin
+    # of the initial end-effector pose. Also add roll and pitch limits to keep the
+    # hand pointed downward.
+    configuration.update(model.key("home").qpos)
+    T_eef_init = configuration.get_transform_frame_to_world("attachment_site", "site")
+    translation_init = T_eef_init.translation()
+    x_init = translation_init[0]
+    y_init = translation_init[1]
+    z_init = translation_init[2]
+    rpy_init = T_eef_init.rotation().as_rpy_radians()
+    end_effector_task = mink.PoseConstraintTask(
         frame_name="attachment_site",
         frame_type="site",
+        root_name="world",
+        root_type="body",
         position_cost=1.0,
         orientation_cost=1.0,
-        lm_damping=1.0,
+        x_translation=(x_init - 0.1, x_init + 0.1),
+        y_translation=(y_init - 0.1, y_init + 0.1),
+        z_translation=(z_init - 0.1, z_init + 0.1),
+        roll=(rpy_init.roll - 0.2, rpy_init.roll + 0.2),
+        pitch=(rpy_init.pitch - 0.2, rpy_init.pitch + 0.2),
+        lm_damping=1e-3,
     )
 
     posture_task = mink.PostureTask(model=model, cost=5e-2)
@@ -112,7 +129,7 @@ if __name__ == "__main__":
 
         rate = RateLimiter(frequency=200.0, warn=False)
         while viewer.is_running():
-            # Update kuka end-effector task.
+            # Update end-effector task.
             T_wt = mink.SE3.from_mocap_name(model, data, "target")
             end_effector_task.set_target(T_wt)
 

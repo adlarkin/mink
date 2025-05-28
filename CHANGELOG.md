@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- `PoseConstraint` task, which regulates the pose of a frame within translation and rotation limits defined relative to another frame.
+
 ### Changed
 
 - `solve_ik` now raises a new exception, `NoSolutionFound`, when the QP solver fails to find a solution.
