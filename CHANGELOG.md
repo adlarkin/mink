@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- `PoseConstraint` task, which regulates the pose of a frame within translation and rotation limits defined relative to another frame.
+- `clamp` method for SO3 and SE3.
 
 ### Changed
 
