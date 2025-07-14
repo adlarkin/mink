@@ -231,8 +231,7 @@ class SE3(MatrixLieGroup):
         pitch_radians: Tuple[float, float] = (-np.inf, np.inf),
         yaw_radians: Tuple[float, float] = (-np.inf, np.inf),
     ) -> SE3:
-        """
-        Clamp a SE3 within translation and RPY limits.
+        """Clamp a SE3 within translation and RPY limits.
 
         Args:
             x_translation: The (lower, upper) limits for translation along the x axis.

@@ -267,8 +267,7 @@ class SO3(MatrixLieGroup):
         pitch_radians: Tuple[float, float] = (-np.inf, np.inf),
         yaw_radians: Tuple[float, float] = (-np.inf, np.inf),
     ) -> SO3:
-        """
-        Clamp a SO3 within RPY limits.
+        """Clamp a SO3 within RPY limits.
 
         Args:
             roll_radians: The (lower, upper) limits for the roll.

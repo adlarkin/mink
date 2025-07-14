@@ -101,7 +101,7 @@ if __name__ == "__main__":
 
         # Define a rectangular region centered about the origin of the initial
         # end-effector pose. This can be used to clamp the end_effector_task target
-        # to ensure that the end effector stays within this region.
+        # to ensure that the end-effector stays within this region.
         # Roll and pitch limits are also defined to keep the hand pointed downward.
         T_eef_init = configuration.get_transform_frame_to_world(
             "attachment_site", "site"
